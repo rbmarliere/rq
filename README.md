@@ -1,6 +1,8 @@
 [Introduction](https://marliere.net/~ricardo/2023/10/08/better-workflow.html)
 
 ```
+$ rq -h
+
 usage: rq [-h] [-I IMG_DIR] [-k KERNEL] [--no-kernel] [-d DISK] [--no-disk]
           [-i INITRD] [-b BIOS] [-p PORT] [-f [F ...]] [-F [F ...]] [-c]
           [-a APPEND] [-g] [--wait-gdb] [--no-snapshot] [--debug]
@@ -36,4 +38,18 @@ options:
   --no-snapshot         do not use -snapshot (default: False)
   --debug               print qemu command instead of running it (default:
                         False)
+
+$ rq --debug
+
+qemu-system-x86_64 \
+    -m 8G \
+    -smp 2,sockets=2,cores=1 \
+    -net nic,model=e1000 \
+    -net user,host=10.0.2.25,hostfwd=tcp::10022-:22 \
+    -enable-kvm \
+    -nographic \
+    -bios /home/rbmarliere/images/seabios.bin \
+    -snapshot \
+    -kernel linux/arch/x86/boot/bzImage \
+    -drive format=raw,file=/home/rbmarliere/images/disk.img
 ```
