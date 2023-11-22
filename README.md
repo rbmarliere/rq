@@ -38,6 +38,7 @@ options:
   --no-snapshot         do not use -snapshot (default: False)
   --debug               print qemu command instead of running it (default:
                         False)
+  -A ARCH, --arch ARCH  architecture to use (default: x86_64)
 
 $ rq --debug
 
